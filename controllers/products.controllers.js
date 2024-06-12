@@ -3,7 +3,7 @@ const pool = require('../config/db');
 const getAllProducts = async (req, res) => {
     try {
         const products = await pool.query("SELECT * FROM products");
-        res.status(200).json(products);
+        res.status(200).json({ data: products });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -13,7 +13,7 @@ const getProductById = async (req, res) => {
     try {
         const { id } = req.params;
         const product = await pool.query("SELECT * FROM products WHERE id = ?", [id]);
-        res.status(200).json(product);
+        res.status(200).json({ data: product });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
