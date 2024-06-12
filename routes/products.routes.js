@@ -36,6 +36,19 @@ router.get('/products', verifyToken, productsControllers.getAllProducts)
  *          type: string
  *        required: true
  *        description: Bearer token for authentication
+ *      - in: body
+ *        name: product
+ *        schema:
+ *          type: object
+ *          properties:
+ *            title:
+ *              type: string
+ *            description:
+ *              type: string
+ *            status:
+ *              type: string
+ *        required: true
+ *        description: Body of the product
  *    responses:
  *      200:
  *        description: Created product
@@ -80,6 +93,19 @@ router.get('/products/:id', verifyToken, productsControllers.getProductById)
  *          type: string
  *        required: true
  *        description: Bearer token for authentication
+ *      - in: body
+ *        name: product
+ *        schema:
+ *          type: object
+ *          properties:
+ *            title:
+ *              type: string
+ *            description:
+ *              type: string
+ *            status:
+ *              type: string
+ *        required: true
+ *        description: Body of the product
  *      - name: id
  *        in: path
  *        description: ID of the product

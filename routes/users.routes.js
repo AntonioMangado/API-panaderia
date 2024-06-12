@@ -8,6 +8,20 @@ const usersControllers = require('../controllers/users.controllers')
  *    tags:
  *      - Users
  *    description: Creates an user
+ *    parameters:
+ *      - in: body
+ *        name: user
+ *        schema:
+ *          type: object
+ *          properties:
+ *            username:
+ *              type: string
+ *            email:
+ *              type: string
+ *            password:
+ *              type: string
+ *        required: true
+ *        description: Data for user creation
  *    responses:
  *      200:
  *        description: User created
@@ -21,20 +35,18 @@ router.post('/users', usersControllers.createUser)
  *    tags:
  *      - Users
  *    description: User logs in and generates an access token
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - username
- *              - password
- *            properties:
- *              username:
- *                type: string
- *              password:
- *                type: string 
+ *    parameters:
+ *      - in: body
+ *        name: user
+ *        schema:
+ *          type: object
+ *          properties:
+ *            username:
+ *              type: string
+ *            password:
+ *              type: string
+ *        required: true
+ *        description: Example login credentials
  *    responses:
  *      200:
  *        description: User logged in
