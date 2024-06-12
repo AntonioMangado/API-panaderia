@@ -23,12 +23,9 @@ app.get('/', function(req, res){
                 deleteProduct: "DELETE /products/:id"
             },
             users: {
-                getUsers: "GET /users",
                 createUser: "POST /users",
-                getUser: "GET /users/:id",
-                updateUser: "PUT /users/:id",
-                deleteUser: "DELETE /users/:id"
-        }
+                loginUser: "POST /users/login"
+            }
      }});
 });
 
