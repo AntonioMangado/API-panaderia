@@ -1,5 +1,5 @@
 const winston = require('winston')
-const { combine, timestamp, json, prettyPrint, errors } = winston.format
+const { combine, timestamp, json, prettyPrint, errors, printf } = winston.format
 
 winston.loggers.add('ProductsLogger', {
     format: combine(
@@ -25,4 +25,11 @@ winston.loggers.add('UsersLogger', {
         new winston.transports.File({filename: 'logs/users.log', level: 'error'})
     ],
     defaultMeta: { service: 'UsersService' }
+})
+
+winston.loggers.add('ConsoleLogger', {
+    format: printf(info => `${info.message}`),
+    transports: [
+        new winston.transports.Console()
+    ],
 })
