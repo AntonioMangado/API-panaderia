@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
+const verifyToken = require('./middleware/verifyToken')
 const productsRoutes = require('./routes/products.routes')
 const usersRoutes = require('./routes/users.routes')
 
@@ -12,12 +13,28 @@ app.use(express.urlencoded({ extended: true }));
 
 // Template route
 app.get('/', function(req, res){
-    res.send('Panaderia API with MariaDB');
+    res.status(200).json({ message: "Panaderia API con MariaDB",
+        availableEndpoints: {
+            products: {
+                getProducts: "GET /products",
+                createProduct: "POST /products",
+                getProduct: "GET /products/:id",
+                updateProduct: "PUT /products/:id",
+                deleteProduct: "DELETE /products/:id"
+            },
+            users: {
+                getUsers: "GET /users",
+                createUser: "POST /users",
+                getUser: "GET /users/:id",
+                updateUser: "PUT /users/:id",
+                deleteUser: "DELETE /users/:id"
+        }
+     }});
 });
 
 // Routes
-app.use('/', productsRoutes);
 app.use('/', usersRoutes);
+app.use('/', verifyToken, productsRoutes);
 
 // 404 route
 app.get("*", (req,res) => { 
