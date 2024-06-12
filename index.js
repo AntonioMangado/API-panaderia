@@ -4,7 +4,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const verifyToken = require('./middleware/verifyToken')
 const productsRoutes = require('./routes/products.routes')
-const usersRoutes = require('./routes/users.routes')
+const usersRoutes = require('./routes/users.routes');
 
 // Enable JSON reception
 app.use(express.json())
