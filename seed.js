@@ -2,6 +2,16 @@ const pool = require('./config/db');
 const { faker } = require('@faker-js/faker');
 const INTERVALS = 10;
 
+//DISCLAIMER: Current version of this seed is not working. When running, it throws the following error:
+//
+//
+// SqlError: (conn:-1, no: 45028, SQLState: HY000) retrieve
+// connection from pool timeout after 10002ms
+//     (pool connections: active=0 idle=0 limit=5)
+// 
+//
+// Several fixes have been attempted to no avail
+
 const generateProducts = () => {
     const products = [];
     for (let i = 0; i < 10; i++) {
