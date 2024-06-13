@@ -40,7 +40,11 @@ const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, description, status } = req.body;
-        await pool.query("UPDATE products SET title = ?, description = ?, status = ? WHERE id = ?", [title, description, status, id]);
+        const result = await pool.query("UPDATE products SET title = ?, description = ?, status = ? WHERE id = ?", [title, description, status, id]);
+        if (result.affectedRows === 0) {
+            productsLogger.error(`Product with id ${id} not found`)
+            return res.status(404).json({ message: `Product with id ${id} not found` });
+        }
         res.status(200).json({
             message: `Product with id ${id} updated`,
             product: {
@@ -59,7 +63,11 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        await pool.query("DELETE FROM products WHERE id = ?", [id]);
+        const result = await pool.query("DELETE FROM products WHERE id = ?", [id]);
+        if (result.affectedRows === 0) {
+            productsLogger.error(`Product with id ${id} not found`)
+            return res.status(404).json({ message: `Product with id ${id} not found` });
+        }
         res.status(200).json({message: `Product with id ${id} deleted`});
     } catch (err) {
         productsLogger.error(err.message)
